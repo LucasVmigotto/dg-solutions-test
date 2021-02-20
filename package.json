@@ -1,0 +1,23 @@
+{
+  "name": "dg-solutions-test",
+  "useWorkspaces": true,
+  "author": {
+    "name": "Lucas Vidor Migotto",
+    "email": "lvmigotto1@gmail.com"
+  },
+  "scripts": {
+    "postinstall": "lerna bootstrap",
+    "build": "lerna run --stream build",
+    "lint": "lerna run --stream lint",
+    "migrate": "lerna run --stream migrate:latest",
+    "test": "lerna run --stream test",
+    "test:coverage": "lerna run --stream test:coverage"
+  },
+  "dependencies": {
+    "lerna": "^3.22.1"
+  },
+  "engines": {
+    "node": "^14.15.5",
+    "yarn": "^1.22.5"
+  }
+}
