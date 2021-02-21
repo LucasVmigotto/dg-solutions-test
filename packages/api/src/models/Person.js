@@ -22,7 +22,7 @@ const typeDefs = gql`
 
   extend type Query {
     person(personId: ID!): Person!
-    people(limit: Int, offset: Int): PersonList!
+    people(limit: Int, offset: Int, name: String): PersonList!
   }
 
   extend type Mutation {
@@ -45,17 +45,33 @@ const resolvers = {
         .where({ person_id: personId })
       return camelizeKeys(data)
     },
-    async people (_, { limit = 100, offset = 0 }, { knex }) {
-      const data = await knex('person')
-        .select(
-          'person_id',
-          'name',
-          'birth_date',
-          'create_at',
-          'update_at'
-        )
-        .limit(limit)
-        .offset(offset)
+    async people (_, { limit = 100, offset = 0, name }, { knex }) {
+      let data = null
+
+      if (name) {
+        data = await knex('person')
+          .select(
+            'person_id',
+            'name',
+            'birth_date',
+            'create_at',
+            'update_at'
+          )
+          .limit(limit)
+          .offset(offset)
+          .where('name', 'like', `%${name}%`)
+      } else {
+        data = await knex('person')
+          .select(
+            'person_id',
+            'name',
+            'birth_date',
+            'create_at',
+            'update_at'
+          )
+          .limit(limit)
+          .offset(offset)
+      }
 
       const [{ count }] = await knex('person').count('person_id')
 
