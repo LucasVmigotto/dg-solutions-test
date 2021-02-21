@@ -12,8 +12,8 @@ const QUERY_GET_PERSON = `
 `
 
 const QUERY_GET_PEOPLE = `
-  query ($limit: Int, $offset: Int) {
-    people(limit: $limit, offset: $offset) {
+  query ($limit: Int, $offset: Int, $name: String) {
+    people(limit: $limit, offset: $offset, name: $name) {
       count
       items {
         personId
@@ -28,7 +28,7 @@ const QUERY_GET_PEOPLE = `
 const MUTATION_CREATE_PEOPLE = `
   mutation ($input: PersonInput!) {
     persistPerson(input: $input) {
-      name
+      personId
     }
   }
 `
@@ -39,8 +39,8 @@ const MUTATION_DELETE_PEOPLE = `
   }
 `
 
-export async function getPeople ({ limit = 100, offset = 0 } = {}) {
-  const { people } = await gql(QUERY_GET_PEOPLE, { limit, offset })
+export async function getPeople ({ limit = 100, offset = 0, name = '' } = {}) {
+  const { people } = await gql(QUERY_GET_PEOPLE, { limit, offset, name })
   return { ...people }
 }
 
