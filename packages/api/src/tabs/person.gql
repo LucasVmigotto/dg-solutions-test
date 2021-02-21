@@ -24,8 +24,8 @@ query People {
 mutation CreatePerson {
   persistPerson(
     input: {
-      name: ""
-      birthDate: ""
+      name: "Test Name"
+      birthDate: "2021-02-07T10:00:00.000Z"
     }
   ) {
     personId
@@ -40,8 +40,8 @@ mutation UpdatePerson {
   persistPerson(
     personId: 1
     input: {
-      name: ""
-      birthDate: ""
+      name: "Test Name CHANGED"
+      birthDate: "2021-02-07T11:00:00.000Z"
     }
   ) {
     personId
