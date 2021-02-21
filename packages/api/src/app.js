@@ -18,20 +18,20 @@ module.exports = config => {
 
   const formatError = config.NODE_ENV !== 'test'
     ? err => {
-      if (err.extensions.code === 'INTERNAL_SERVER_ERROR') {
-        logger.error(err)
-        return new GraphQLError(
-          'Unexpected Error: ' + err.message,
-          err.nodes,
-          err.source,
-          err.positions,
-          err.path,
-          null,
-          { code: 'INTENAL_SERVER_ERROR' }
-        )
+        if (err.extensions.code === 'INTERNAL_SERVER_ERROR') {
+          logger.error(err)
+          return new GraphQLError(
+            'Unexpected Error: ' + err.message,
+            err.nodes,
+            err.source,
+            err.positions,
+            err.path,
+            null,
+            { code: 'INTENAL_SERVER_ERROR' }
+          )
+        }
+        return err
       }
-      return err
-    }
     : null
 
   const playground = {

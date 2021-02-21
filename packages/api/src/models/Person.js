@@ -43,10 +43,10 @@ const resolvers = {
           'update_at'
         )
         .where({ person_id: personId })
-        return camelizeKeys(data)
+      return camelizeKeys(data)
     },
     async people (_, { limit = 100, offset = 0 }, { knex }) {
-      const [data] = await knex('person')
+      const data = await knex('person')
         .select(
           'person_id',
           'name',
@@ -68,7 +68,7 @@ const resolvers = {
   Mutation: {
     async persistPerson (_, { personId, input }, { knex }) {
       if (personId) {
-        const [person] = knex('person')
+        const [person] = await knex('person')
           .update(decamelizeKeys({
             ...input,
             updateAt: new Date().toISOString()
@@ -76,9 +76,9 @@ const resolvers = {
           .where({ person_id: personId })
           .returning('*')
 
-          return camelizeKeys(person)
+        return camelizeKeys(person)
       } else {
-        const [person] = knex('person')
+        const [person] = await knex('person')
           .insert(decamelizeKeys({
             ...input
           }))

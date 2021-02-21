@@ -6,8 +6,8 @@
   "license": "MIT",
   "private": true,
   "repository": {
-      "type": "git",
-      "url": "git@github.com:LucasVmigotto/dg-solutions-test.git"
+    "type": "git",
+    "url": "git@github.com:LucasVmigotto/dg-solutions-test.git"
   },
   "author": {
     "name": "Lucas Vidor Migotto",
@@ -19,11 +19,19 @@
     "migrate:make": "knex migrate:make",
     "migrate:latest": "knex migrate:latest",
     "migrate:rollback": "knex migrate:rollback --all",
+    "test": "NODE_ENV=test mocha 'test/**/*.test.js'",
+    "test:coverage": "rm -rf ./node_modules/.cache && rm -rf .nyc_output && rm -rf coverage/ && NODE_ENV=test nyc --reporter=text-summary --reporter=lcov mocha 'test/**/*.test.js'",
+    "test:watch": "NODE_ENV=test mocha --watch",
     "lint": "standard"
   },
   "devDependencies": {
+    "chai": "^4.3.0",
+    "chai-as-promised": "^7.1.1",
+    "chai-http": "^4.3.0",
     "debug": "^4.3.1",
+    "mocha": "^8.3.0",
     "nodemon": "^2.0.7",
+    "nyc": "^15.1.0",
     "standard": "^16.0.3",
     "winston": "^3.3.3"
   },
