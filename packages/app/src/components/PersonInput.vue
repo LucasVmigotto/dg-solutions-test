@@ -1,7 +1,7 @@
 <template>
   <div id="form">
     <form>
-      <div id="name-field">
+      <div class="field">
         <label for="name">
           Nome:
         </label>
@@ -12,7 +12,7 @@
           type="text"
         />
       </div>
-      <div id="birth-field">
+      <div class="field">
         <label for="birthDate">
           Data de nascimento:
         </label>
@@ -23,7 +23,7 @@
           type="date"
         />
       </div>
-      <div id="button">
+      <div class="field">
         <button
           :disabled="isDisabled"
           @click.prevent="savePerson"
@@ -65,8 +65,12 @@ export default {
 
 <style>
 #form {
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14),
-              0 3px 1px -2px rgba(0, 0, 0, .2),
-              0 1px 5px 0 rgba(0, 0, 0, .12);
+  box-shadow:
+    0 3px 6px rgba(0,0,0,0.16),
+    0 3px 6px rgba(0,0,0,0.23);
+}
+
+.field {
+  margin: 1.5em 0;
 }
 </style>
