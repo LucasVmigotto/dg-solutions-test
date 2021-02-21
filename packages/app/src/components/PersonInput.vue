@@ -68,9 +68,12 @@ export default {
   box-shadow:
     0 3px 6px rgba(0,0,0,0.16),
     0 3px 6px rgba(0,0,0,0.23);
+  margin: 0 auto;
+  border-radius: .5em;
 }
 
 .field {
   margin: 1.5em 0;
+  padding: 0 2em;
 }
 </style>
