@@ -2,16 +2,21 @@
   <div id="app">
     <h1>Criação de Registro</h1>
     <person-input @onSave="savePerson"/>
-    <person-list :people="people"/>
+    <person-list
+      :people="people"
+      @getPerson="searchPerson"
+    />
   </div>
 </template>
 
 <script>
+import moment from 'moment'
 import PersonInput from './components/PersonInput'
 import PersonList from './components/PersonList.vue'
 import {
   createPerson,
-  getPeople
+  getPeople,
+  getPerson
 } from './api/queries/person'
 
 export default {
@@ -36,8 +41,23 @@ export default {
     savePerson (input) {
       createPerson(input)
         .then(async (res) => {
-          if (res) {
+          if (res && res.personId) {
             await this.refreshList()
+          }
+        })
+    },
+    searchPerson (personId) {
+      getPerson(personId)
+        .then((res) => {
+          if (res && res.personId) {
+            const {
+              name, birthDate, createAt
+            } = res
+            alert(`
+              Nome: ${name}
+              Data de Nascimento: ${moment(birthDate).format('DD/MM/YYYY')}
+              Criado em ${moment(createAt).locale('pt-BR').format('LLLL')}
+            `)
           }
         })
     }

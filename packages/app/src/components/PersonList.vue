@@ -23,10 +23,20 @@
           :key="index"
         >
           <td class="td">
-            {{ el.name }}
+            <a
+              class="more-details"
+              @click="getPerson(el.personId)"
+            >
+              {{ el.name }}
+            </a>
           </td>
           <td class="td">
-            {{ formatDate(el.birthDate) }}
+            <a
+              class="more-details"
+              @click="getPerson(el.personId)"
+            >
+              {{ formatDate(el.birthDate) }}
+            </a>
           </td>
         </tr>
       </tbody>
@@ -47,7 +57,10 @@ export default {
   },
   methods: {
     formatDate: (date, pattern = 'DD/MM/YYYY') =>
-      moment(date).format(pattern)
+      moment(date).format(pattern),
+    getPerson (id) {
+      this.$emit('getPerson', id)
+    }
   },
 }
 </script>
@@ -82,6 +95,14 @@ export default {
 .td {
   padding: 1em 0 .3em 0;
   border-bottom: .1em #2c3e50 solid;
+}
+
+.more-details {
+  cursor: help;
+}
+
+.more-details:hover {
+  color: red;
 }
 
 @media (min-width: 600px) {
