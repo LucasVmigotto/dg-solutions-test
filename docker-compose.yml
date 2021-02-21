@@ -52,7 +52,7 @@ services:
       - HTTP_PROXY
       - HTTPS_PROXY
       - NO_PROXY
-    command: yarn dev
+    command: yarn serve
     working_dir: /app/packages/app
     environment:
     - LOCAL_USER_ID
