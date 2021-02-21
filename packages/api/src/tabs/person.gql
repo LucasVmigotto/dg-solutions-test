@@ -1,0 +1,57 @@
+query Person {
+  person(personId: 1) {
+    personId
+    name
+    birthDate
+    createAt
+    updateAt
+  }
+}
+
+query People {
+  people(limit: 100, offset:0) {
+    count
+    items {
+      personId
+      name
+      birthDate
+      createAt
+      updateAt
+    }
+  }
+}
+
+mutation CreatePerson {
+  persistPerson(
+    input: {
+      name: ""
+      birthDate: ""
+    }
+  ) {
+    personId
+    name
+    birthDate
+    createAt
+    updateAt
+  }
+}
+
+mutation UpdatePerson {
+  persistPerson(
+    personId: 1
+    input: {
+      name: ""
+      birthDate: ""
+    }
+  ) {
+    personId
+    name
+    birthDate
+    createAt
+    updateAt
+  }
+}
+
+mutation DeletePerson {
+  deletePerson(personId: 1)
+}
