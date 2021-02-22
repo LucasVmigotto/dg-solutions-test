@@ -30,38 +30,54 @@
     yarn
     ```
 
-4. Utilize os serviços
+4. Crie o esquema no banco de dados
 
-    * **_pgcli_**:
+    ```bash
+    yarn migrate:latest
+    ```
 
-        ```bash
-        docker-compose run --rm pgcli
-        ```
+5. Inicialize os serviços
 
-    * **_API_**:
+    ```bash
+    docker-compose up api app
+    ```
 
-        * Subir o serviço:
+    > API disponível em [localhost:4000](http://localhost:4000/api/graphql)
+    >
+    > APP disponível em [localhost:4001](http://localhost:4001)
 
-            ```bash
-            docker-compose up api
-            ```
+## Utilize os serviços
 
-        * Utilizar a `CLI`:
+* **_pgcli_**:
 
-            ```bash
-            docker-compose run --rm --service-ports api bash
-            ```
+    ```bash
+    docker-compose run --rm pgcli
+    ```
 
-    * **_APP_**:
+* **_API_**:
 
-        * Subir o serviço:
+  * Subir o serviço:
 
-            ```bash
-            docker-compose up app
-            ```
+    ```bash
+    docker-compose up api
+    ```
 
-        * Utilizar a `CLI`:
+  * Utilizar a `CLI`:
 
-            ```bash
-            docker-compose run --rm --service-ports app bash
-            ```
+    ```bash
+    docker-compose run --rm --service-ports api bash
+    ```
+
+* **_APP_**:
+
+  * Subir o serviço:
+
+    ```bash
+    docker-compose up app
+    ```
+
+  * Utilizar a `CLI`:
+
+    ```bash
+    docker-compose run --rm --service-ports app bash
+    ```
