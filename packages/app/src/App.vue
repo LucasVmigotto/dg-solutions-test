@@ -2,6 +2,10 @@
   <div id="app">
     <h1>Criação de Registro</h1>
     <person-input @onSave="savePerson"/>
+    <person-search
+      @clear="clearSearch"
+      @search="searchName"
+    />
     <person-list
       :people="people"
       @getPerson="searchPerson"
@@ -12,6 +16,7 @@
 <script>
 import moment from 'moment'
 import PersonInput from './components/PersonInput'
+import PersonSearch from './components/PersonSearch.vue'
 import PersonList from './components/PersonList.vue'
 import {
   createPerson,
@@ -23,6 +28,7 @@ export default {
   name: 'App',
   components: {
     PersonInput,
+    PersonSearch,
     PersonList
   },
   async created() {
@@ -60,6 +66,15 @@ export default {
             `)
           }
         })
+    },
+    async clearSearch () {
+      await this.refreshList()
+    },
+    searchName (name) {
+      getPeople({ name })
+        .then(({ items }) => {
+          this.people = items
+        })
     }
   },
 }
@@ -72,7 +87,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
   display: flex;
   flex-direction: column;
 }
