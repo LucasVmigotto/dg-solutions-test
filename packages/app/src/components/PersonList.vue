@@ -66,10 +66,6 @@ export default {
 </script>
 
 <style>
-#list {
-  margin: 1.5em 0;
-}
-
 .table {
   box-shadow:
     0 3px 6px rgba(0,0,0,0.16),
